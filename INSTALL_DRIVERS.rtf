@@ -1,0 +1,119 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Bold;\f4\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red127\green127\blue127;\red108\green108\blue108;
+}
+{\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww23600\viewh16380\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation etc\'94 in the main spim-interface folder)\
+\
+A related note: if running on old mac hardware, there\'92s the question of what OS version to run on. Anecdotally, Big Sur and Monterey do not perform well with a magnetic hard disk (pre-SSD), so that is worth bearing in mind when making the choice. If you want to use QImaging cameras, also check whether the QImaging 32-bit drivers work on the intended OS version (it\'92s supposed to be beyond Mojave that 32-bit builds are no longer supported)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Instructions for driver installation
+\f0\b0 \
+\
+1. You only need to install camera drivers for the camera types you will be using on this system. Installers for Spinnaker/Ximea/Vimba can be obtained from the manufacturers, or for convenience I have archived the installers here:\
+https://drive.google.com/drive/folders/1S1qlP1ljtiXiidJy6oINp2YbAXds2mOe?usp=sharing\
+(these files are too large to be contained in a github-hosted repository)\
+\
+1a. Optional: Qimaging drivers. Run the QCapture installer from this directory here. Note that if we want to actually use a QImaging camera, we require a 32-bit build of Spim GUI: the 64-bit QCapture driver has always crashed on launch in my hands(!).\
+\
+1b. Optional: Prosilica drivers (for Intel macs). There does not seem to be any official installer. From this directory run:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f2\fs22 \cf2 \CocoaLigature0 sudo cp ../avt_sdk/bin-pc/x64/libPvAPI.dylib /usr/local/lib/
+\f0\fs24 \cf0 \CocoaLigature1  \
+For a 32-bit build of Spim GUI, run:\
+
+\f2\fs22 \cf2 \CocoaLigature0 sudo cp ../avt_sdk/bin-pc/x86/libPvAPI.dylib /usr/local/lib/
+\f0\fs24 \cf0 \CocoaLigature1 \
+If you want both builds supported on the same machine, one could be installed in /usr/lib instead.\
+\
+1c. Optional: Ximea drivers. Temporarily set system preferences "Security & Privacy" to accept applications downloaded from "Anywhere" - or, on newer OS versions, just continue with these instructions until you are told it was blocked, then follow instructions to allow it. Run the 'install' script on the XIMEA disk image (either the standard one, or the ARM one). No need to download the h264 stuff when prompted.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+1d. Optional: Spinnaker drivers for FLIR/Point Grey cameras. For Intel macs, install the Spinnaker .pkg on the machine. Note the instructions in the Spinnaker readme file about installing dependencies. The command in there to install homebrew is outdated - it is now: 
+\fs22 \cf3 \expnd0\expndtw0\kerning0
+/bin/bash \cf0 -c\cf3  \cf0 "$(\cf3 curl \cf0 -fsSL\cf3  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh\cf0 )\'94. For ARM macs, install from {\field{\*\fldinst{HYPERLINK "https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3"}}{\fldrslt https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3}} (file too large to be included in this driver-installs submodule)
+\fs24 \kerning1\expnd0\expndtw0 \
+\
+1e. Optional: Vimba X drivers for Prosilica drivers on ARM macs. Run the installer at VimbaX_Setup-2023-4-macOS.dmg.\
+\
+2. FTDI drivers should be installed. This could be done using the .dmg installer file, but better (up to OS X 10.9 at least) would be to copy the .kext direct to /System/Library/Extensions. May need to restart and/or touch the parent folder to get it to be picked up. See separate note \'93FTDI Readme.txt\'94 for more details on the reasons behind these two install methods.\
+\
+3. Install anaconda python 3.x, if not already present: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html .\
+		 (2.7 is also supported, but you will need to rebuild code from source, after tweaking the Xcode project file)\
+\
+4. \ul Whether or not\ulnone  you already had anaconda on your system, you are strongly encouraged to run \'93
+\f2\fs22 \CocoaLigature0 pip install --upgrade --force-reinstall scipy
+\f0\fs24 \CocoaLigature1 \'94 from the command line. Otherwise there is a high chance of problems later (there is a weird compatibility issue that I don\'92t understand, which is fixed by doing this). You may well find that the long-term sync helper crashes on launch if you do not do this!\
+\
+5. Optional: xbox controller driver 360ControllerInstall, to allow controller to be used for microscope stages.\
+\
+If you just want to run an existing copy of the Spim GUI applications, that is all you need to do.\
+e.g. if installing onto a "customer" system you might just do this.\
+If however you want to build the code from source, then several further steps are required:\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 To build code from source\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b0 \cf0 \
+If you are setting things up to build the Spim GUI from scratch, from source code, then you will need to also do the following:\
+\
+6. If building Spim GUI from source code, you need to make camera drivers available to link against in this directory - whether or not you are actually doing a proper install of driver support for each camera type. To do this:\
+6a Unzip the Spinnaker zipfile in this directory.\
+6b Copy m3api.framework into this directory from within XIMEA_OSX_SP.dmg\
+\
+7: Optional: upgrade git from http://git-scm.com/download/mac in order to get gitk support [or indeed you may need to install git entirely, on older systems, which can be done using a standalone installer]. Requires home-brew to be installed, then \'93brew cask install tcl\'94.\
+Then run the command: git config --global merge.tool opendiff\
+Note that one some systems gitk doesn\'92t work. This seems to be a version compatibility issue with the tcl-tk backend, but I haven\'92t managed to sort that out. Alternative is to install https://www.sourcetreeapp.com/download-archives which gives a similar view to gitk. v2.7.6 is compatible with Mac OS 10.12\
+One some versions of Xcode opendiff (FileMerge) just doesn\'92t seem to work with .rtf files - very weird! I know this is a problem with Xcode 14.0.1 and 14.2. SourceTree will give a passable diff display, albeit in an unfamiliar interface.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf3 \strike \strikec3 Not required any more:\cf0 \strike0\striked0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf4 \strike \strikec4 \
+8. not required any more\cf0 \strike0\striked0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf3 \strike \strikec3 9. Build gsl in the driver-installs folder - decompress the tarball, navigate to the folder that has just been decompressed, and run the following two commands:\
+	./configure --disable-shared CC="gcc -arch i386 -arch x86_64 -mmacosx-version-min=10.6" CPP="gcc -E" CXXCPP="g++ -E"\
+	make -j 2\
+[n.b. you would normally also do \'91sudo make install\'92 to install gsl on the system, though actually this is unnecessary in order to build the Spim GUI:\
+[n.b. the version-min=10.6 is intended to silence warnings when linking Spim GUI on more recent OSes, but may need updating if I change the build settings for the app itself]\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \strike0\striked0 \
+10. Build libtiff in the driver-installs folder - decompress the file tiff-4.0.9.zip, navigate to the folder that has just been decompressed, and run the relevant one of the following commands (no need to do a \'93make install\'94 step):\
+\
+10a. On Intel macs, run: \'93./configure --disable-shared --disable-lzma --disable-jpeg CFLAGS='-target x86_64-apple-macos10.11' CXXFLAGS='-target x86_64-apple-macos10.11' LDFLAGS='-target x86_64-apple-macos10.11; make -j 2\'94\
+[n.b. we specify macos10.11 to match the target OS version in Spim GUI, to silence compiler warnings]\
+\
+10b On ARM macs, build a universal library by running \'93FLAGS_TO_USE='-arch x86_64 -arch arm64 -mmacosx-version-min=10.11'; ./configure CFLAGS=$\{FLAGS_TO_USE\} CXXFLAGS=$\{FLAGS_TO_USE\} LDFLAGS=$\{FLAGS_TO_USE\} --disable-shared; make -j 4\'94\
+\
+10c For a 32-bit build (only needed if requiring QImaging camera support), make a \ul separate\ulnone  directory \'93tiff-4.0.9_i386\'94, and run this alternative command: \'93make clean; ./configure "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32" ABI=32 --disable-shared --disable-lzma --disable-jpeg; make -j 2\'94\
+[n.b. the disable-xxx seem to be needed if those libraries are installed on the system - libtiff is set up to use it and link against it, but my code does not link against those libraries. It is necessary either to link against them or to disable them in libtiff]\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\b \cf0 After
+\f0\b0  building libtiff, you will need to edit libtiff/tiff.h and change \'93typedef TIFF_UINT64_T uint64\'93 to \'93typedef uint64_t uint64\'94. Without this a compile error occurs when including the header file from my own code (\'93typedef redefinition with different types\'94). Note that on Mojave 10.14 this edit has to be done 
+\f4\i after
+\f0\i0  building libtiff yourself, or that build will not work!\
+\
+11. Build and install the py_sad_correlation module for python [TODO: should probably do this in a more elegant way, or maybe even integrate it into the Xcode project]. From within that submodule:\
+	git submodule init; git submodule update\
+	python setup.py build\
+	python setup.py install\
+\
+Now return to the instructions in Installation/INSTALL.rtf.\
+\
+\
+Note: Physik Instrumente have provided a Windows program and files to enable the firmware on their new stage controllers to be downgraded to maintain compatibility with the old Mercury command set that I have coded for in Spim GUI. That saved (or at least postponed) the need to introduce a third stage type to support the GCS commands.}
