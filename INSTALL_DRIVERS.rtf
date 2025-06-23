@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2709
+{\rtf1\ansi\ansicpg1252\cocoartf2822
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 Menlo-Regular;
 \f3\fnil\fcharset0 Menlo-Bold;\f4\fswiss\fcharset0 Helvetica-Oblique;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red127\green127\blue127;\red108\green108\blue108;
@@ -69,8 +69,8 @@ If however you want to build the code from source, then several further steps ar
 If you are setting things up to build the Spim GUI from scratch, from source code, then you will need to also do the following:\
 \
 6. If building Spim GUI from source code, you need to make camera drivers available to link against in this directory - whether or not you are actually doing a proper install of driver support for each camera type. To do this:\
-6a Unzip the Spinnaker zipfile in this directory.\
-6b Copy m3api.framework into this directory from within XIMEA_OSX_SP.dmg\
+6a Unzip the Spinnaker zipfile in this directory (4.x for ARM, 2.x for Intel)\
+6b Copy m3api.framework into this directory from within XIMEA_OSX_SP.dmg or XIMEA_macOS_ARM_SP.dmg (although currently the header files are the same in both)\
 \
 7: Optional: upgrade git from http://git-scm.com/download/mac in order to get gitk support [or indeed you may need to install git entirely, on older systems, which can be done using a standalone installer]. Requires home-brew to be installed, then \'93brew cask install tcl\'94.\
 Then run the command: git config --global merge.tool opendiff\
