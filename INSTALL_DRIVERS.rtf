@@ -1,16 +1,30 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fnil\fcharset0 Menlo-Regular;
-\f3\fnil\fcharset0 Menlo-Bold;\f4\fswiss\fcharset0 Helvetica-Oblique;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red127\green127\blue127;\red108\green108\blue108;
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\fmodern\fcharset0 Courier;\f5\fnil\fcharset0 Menlo-Bold;
 }
-{\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
-}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red127\green127\blue127;\red0\green0\blue0;
+\red108\green108\blue108;}
+{\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\cssrgb\c0\c0\c0;
+\csgray\c50000;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww23600\viewh16380\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation etc\'94 in the main spim-interface folder)\
 \
 A related note: if running on old mac hardware, there\'92s the question of what OS version to run on. Anecdotally, Big Sur and Monterey do not perform well with a magnetic hard disk (pre-SSD), so that is worth bearing in mind when making the choice. If you want to use QImaging cameras, also check whether the QImaging 32-bit drivers work on the intended OS version (it\'92s supposed to be beyond Mojave that 32-bit builds are no longer supported)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Hardware notes\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b0 \cf0 - For modern macs with USB-C connections, use a 
+\f2\i separate
+\f0\i0  USB hub for every USB camera (or a compact USB-C-to-USB-A adaptor). I haven\'92t found any dongles that actually support the USB3.1 gen 2 transfer rate of 10GB/s, which would be required to support a stream from two cameras simultaneously.\
+- The ethernet port used for the Prosilica GS650 must be configured to Jumbo Frames, or it will drop frames.\
+- Because of this, ethernet for the Prosilica GS650 must 
+\f2\i not 
+\f0\i0 be run through a dongle, it needs to be on a hard-wired ethernet port on the back of e.g. a mac mini. I can\'92t find any dongles that support jumbo frames.\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -26,11 +40,11 @@ https://drive.google.com/drive/folders/1S1qlP1ljtiXiidJy6oINp2YbAXds2mOe?usp=sha
 1b. Optional: Prosilica drivers (for Intel macs). There does not seem to be any official installer. From this directory run:\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f2\fs22 \cf2 \CocoaLigature0 sudo cp ../avt_sdk/bin-pc/x64/libPvAPI.dylib /usr/local/lib/
+\f3\fs22 \cf2 \CocoaLigature0 sudo cp ../avt_sdk/bin-pc/x64/libPvAPI.dylib /usr/local/lib/
 \f0\fs24 \cf0 \CocoaLigature1  \
 For a 32-bit build of Spim GUI, run:\
 
-\f2\fs22 \cf2 \CocoaLigature0 sudo cp ../avt_sdk/bin-pc/x86/libPvAPI.dylib /usr/local/lib/
+\f3\fs22 \cf2 \CocoaLigature0 sudo cp ../avt_sdk/bin-pc/x86/libPvAPI.dylib /usr/local/lib/
 \f0\fs24 \cf0 \CocoaLigature1 \
 If you want both builds supported on the same machine, one could be installed in /usr/lib instead.\
 \
@@ -48,9 +62,11 @@ If you want both builds supported on the same machine, one could be installed in
 \
 3. Install anaconda python 3.x, if not already present: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html .\
 		 (2.7 is also supported, but you will need to rebuild code from source, after tweaking the Xcode project file)\
+		 (Note that miniconda is not currently supported, although this should be as simple as changing/adding a few paths in the Xcode project build settings, where they currently say \'91anaconda3\'92)\
+3a. Optional: if you want Anaconda installed and accessible for all users of the computer, it seems you need to manually copy the contents of the .bash_profile for the user who did the installing, and put it into the .zprofile for each other user. (I am not sure where the discrepancy in profile name comes from. Anaconda seems to only modify .bash_profile, but this seems to work; for other users .bash_profile isn\'92t read and it has to be .zprofile that is edited)\
 \
 4. \ul Whether or not\ulnone  you already had anaconda on your system, you are strongly encouraged to run \'93
-\f2\fs22 \CocoaLigature0 pip install --upgrade --force-reinstall scipy
+\f3\fs22 \CocoaLigature0 pip install --upgrade --force-reinstall scipy
 \f0\fs24 \CocoaLigature1 \'94 from the command line. Otherwise there is a high chance of problems later (there is a weird compatibility issue that I don\'92t understand, which is fixed by doing this). You may well find that the long-term sync helper crashes on launch if you do not do this!\
 \
 5. Optional: xbox controller driver 360ControllerInstall, to allow controller to be used for microscope stages.\
@@ -77,14 +93,17 @@ Then run the command: git config --global merge.tool opendiff\
 Note that one some systems gitk doesn\'92t work. This seems to be a version compatibility issue with the tcl-tk backend, but I haven\'92t managed to sort that out. Alternative is to install https://www.sourcetreeapp.com/download-archives which gives a similar view to gitk. v2.7.6 is compatible with Mac OS 10.12\
 One some versions of Xcode opendiff (FileMerge) just doesn\'92t seem to work with .rtf files - very weird! I know this is a problem with Xcode 14.0.1 and 14.2. SourceTree will give a passable diff display, albeit in an unfamiliar interface.\
 \
+8. If building on a multi-user system, git may object about ownership of the spim-interface repository tree when you try and build within Xcode. If so, you probably want to run the command recommended in that error message: 
+\f4\fs26 \expnd0\expndtw0\kerning0
+git config --global --add safe.directory /path/to/spim-interface
+\f0\fs24 \kerning1\expnd0\expndtw0 \
+\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf3 \strike \strikec3 Not required any more:\cf0 \strike0\striked0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf4 \strike \strikec4 \
-8. not required any more\cf0 \strike0\striked0 \
-\
+\cf5 \strike \strikec5 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf3 \strike \strikec3 9. Build gsl in the driver-installs folder - decompress the tarball, navigate to the folder that has just been decompressed, and run the following two commands:\
+\cf3 \strikec3 9. Build gsl in the driver-installs folder - decompress the tarball, navigate to the folder that has just been decompressed, and run the following two commands:\
 	./configure --disable-shared CC="gcc -arch i386 -arch x86_64 -mmacosx-version-min=10.6" CPP="gcc -E" CXXCPP="g++ -E"\
 	make -j 2\
 [n.b. you would normally also do \'91sudo make install\'92 to install gsl on the system, though actually this is unnecessary in order to build the Spim GUI:\
@@ -103,9 +122,9 @@ One some versions of Xcode opendiff (FileMerge) just doesn\'92t seem to work wit
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f3\b \cf0 After
+\f5\b \cf0 After
 \f0\b0  building libtiff, you will need to edit libtiff/tiff.h and change \'93typedef TIFF_UINT64_T uint64\'93 to \'93typedef uint64_t uint64\'94. Without this a compile error occurs when including the header file from my own code (\'93typedef redefinition with different types\'94). Note that on Mojave 10.14 this edit has to be done 
-\f4\i after
+\f2\i after
 \f0\i0  building libtiff yourself, or that build will not work!\
 \
 11. Build and install the py_sad_correlation module for python [TODO: should probably do this in a more elegant way, or maybe even integrate it into the Xcode project]. From within that submodule:\
