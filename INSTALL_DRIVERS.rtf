@@ -2,11 +2,11 @@
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
 \f3\fnil\fcharset0 Menlo-Regular;\f4\fmodern\fcharset0 Courier;\f5\fnil\fcharset0 Menlo-Bold;
 }
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red127\green127\blue127;\red0\green0\blue0;
-\red108\green108\blue108;}
-{\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\cssrgb\c0\c0\c0;
-\csgray\c50000;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww23600\viewh16380\viewkind0
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red127\green127\blue127;\red108\green108\blue108;
+}
+{\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25260\viewh23800\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation etc\'94 in the main spim-interface folder)\
@@ -25,6 +25,7 @@ A related note: if running on old mac hardware, there\'92s the question of what 
 - Because of this, ethernet for the Prosilica GS650 must 
 \f2\i not 
 \f0\i0 be run through a dongle, it needs to be on a hard-wired ethernet port on the back of e.g. a mac mini. I can\'92t find any dongles that support jumbo frames.\
+- Daniel G notes (Aug 2025) that some cameras + some dongles + rear USB-C ports on the mac mini don\'92t work (camera just doesn\'92t show up). All combinations seem to work on the front USB-C ports.\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -101,7 +102,7 @@ git config --global --add safe.directory /path/to/spim-interface
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf3 \strike \strikec3 Not required any more:\cf0 \strike0\striked0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-\cf5 \strike \strikec5 \
+\cf4 \strike \strikec4 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf3 \strikec3 9. Build gsl in the driver-installs folder - decompress the tarball, navigate to the folder that has just been decompressed, and run the following two commands:\
 	./configure --disable-shared CC="gcc -arch i386 -arch x86_64 -mmacosx-version-min=10.6" CPP="gcc -E" CXXCPP="g++ -E"\
