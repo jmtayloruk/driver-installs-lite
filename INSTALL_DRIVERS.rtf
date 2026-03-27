@@ -70,7 +70,13 @@ If you want both builds supported on the same machine, one could be installed in
 \f3\fs22 \CocoaLigature0 pip install --upgrade --force-reinstall scipy
 \f0\fs24 \CocoaLigature1 \'94 from the command line. Otherwise there is a high chance of problems later (there is a weird compatibility issue that I don\'92t understand, which is fixed by doing this). You may well find that the long-term sync helper crashes on launch if you do not do this!\
 \
-5. Optional: xbox controller driver 360ControllerInstall, to allow controller to be used for microscope stages.\
+5. Optional: install support for Xbox game controllers for controlling translation stage motion.\
+	Mac OS 10.15 (Sequoia) or newer: support is including as standard in the operating system.\
+	Mac OS 10.11-14: not supported.\
+	Mac OS 10.10 or earlier: install xbox controller driver 360ControllerInstall, to allow controller to be used for microscope stages. This driver 
+\f1\b absolutely must not be installed
+\f0\b0  on newer versions of mac os as it can cause kernel panics and boot issues!\
+\
 \
 If you just want to run an existing copy of the Spim GUI applications, that is all you need to do.\
 e.g. if installing onto a "customer" system you might just do this.\
