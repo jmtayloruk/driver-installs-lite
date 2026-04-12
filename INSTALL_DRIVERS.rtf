@@ -63,7 +63,7 @@ If you want both builds supported on the same machine, one could be installed in
 \
 3. Install anaconda python 3.x, if not already present: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html .\
 		 (2.7 is also supported, but you will need to rebuild code from source, after tweaking the Xcode project file)\
-		 (Note that miniconda is not currently supported, although this should be as simple as changing/adding a few paths in the Xcode project build settings, where they currently say \'91anaconda3\'92)\
+		 (miniconda is also supported. You will need to run `pip install numpy scipy matplotlib tifffile` after installing miniconda)\
 3a. Optional: if you want Anaconda installed and accessible for all users of the computer, it seems you need to manually copy the contents of the .bash_profile for the user who did the installing, and put it into the .zprofile for each other user. (I am not sure where the discrepancy in profile name comes from. Anaconda seems to only modify .bash_profile, but this seems to work; for other users .bash_profile isn\'92t read and it has to be .zprofile that is edited)\
 \
 4. \ul Whether or not\ulnone  you already had anaconda on your system, you are strongly encouraged to run \'93
