@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2869
+{\rtf1\ansi\ansicpg1252\cocoartf2870
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
 \f3\fnil\fcharset0 Menlo-Regular;\f4\fmodern\fcharset0 Courier;\f5\fnil\fcharset0 Menlo-Bold;
 }
@@ -13,12 +13,10 @@
 \
 A related note: if running on old mac hardware, there\'92s the question of what OS version to run on. Anecdotally, Big Sur and Monterey do not perform well with a magnetic hard disk (pre-SSD), so that is worth bearing in mind when making the choice. If you want to use QImaging cameras, also check whether the QImaging 32-bit drivers work on the intended OS version (it\'92s supposed to be beyond Mojave that 32-bit builds are no longer supported)\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b \cf0 Hardware notes\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\f1\b Hardware notes\
 
-\f0\b0 \cf0 - For modern macs with USB-C connections, use a 
+\f0\b0 - For modern macs with USB-C connections, use a 
 \f2\i separate
 \f0\i0  USB hub for every USB camera (or a compact USB-C-to-USB-A adaptor). I haven\'92t found any dongles that actually support the USB3.1 gen 2 transfer rate of 10GB/s, which would be required to support a stream from two cameras simultaneously.\
 - The ethernet port used for the Prosilica GS650 must be configured to Jumbo Frames, or it will drop frames.\
@@ -27,9 +25,8 @@ A related note: if running on old mac hardware, there\'92s the question of what 
 \f0\i0 be run through a dongle, it needs to be on a hard-wired ethernet port on the back of e.g. a mac mini. I can\'92t find any dongles that support jumbo frames.\
 - Daniel G notes (Aug 2025) that some cameras + some dongles + rear USB-C ports on the mac mini don\'92t work (camera just doesn\'92t show up). All combinations seem to work on the front USB-C ports.\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b \cf0 Instructions for driver installation
+\f1\b Instructions for driver installation
 \f0\b0 \
 \
 1. You only need to install camera drivers for the camera types you will be using on this system. Installers for Spinnaker/Ximea/Vimba can be obtained from the manufacturers, or for convenience I have archived the installers here:\
@@ -83,12 +80,10 @@ e.g. if installing onto a "customer" system you might just do this.\
 If however you want to build the code from source, then several further steps are required:\
 \
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b \cf0 To build code from source\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\f1\b To build code from source\
 
-\f0\b0 \cf0 \
+\f0\b0 \
 If you are setting things up to build the Spim GUI from scratch, from source code, then you will need to also do the following:\
 \
 6. If building Spim GUI from source code, you need to make camera drivers available to link against in this directory - whether or not you are actually doing a proper install of driver support for each camera type. To do this:\
@@ -142,4 +137,4 @@ git config --global --add safe.directory /path/to/spim-interface
 Now return to the instructions in Installation/INSTALL.rtf.\
 \
 \
-Note: Physik Instrumente have provided a Windows program and files to enable the firmware on their new stage controllers to be downgraded to maintain compatibility with the old Mercury command set that I have coded for in Spim GUI. That saved (or at least postponed) the need to introduce a third stage type to support the GCS commands.}
+Note: Physik Instrumente have provided a Windows program and files to enable the firmware on their new stage controllers to be downgraded to maintain compatibility with the old Mercury command set that I have coded for in Spim GUI. That had postponed the need to introduce a third stage type to support the GCS commands, but that is now implemented (2026) so there shouldn\'92t be any need for that any more.}
