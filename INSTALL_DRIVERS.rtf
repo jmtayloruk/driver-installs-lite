@@ -6,7 +6,7 @@
 }
 {\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
 }
-\paperw11900\paperh16840\margl1440\margr1440\vieww25260\viewh16020\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww31920\viewh23260\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation etc\'94 in the main spim-interface folder)\
@@ -24,6 +24,7 @@ A related note: if running on old mac hardware, there\'92s the question of what 
 \f2\i not 
 \f0\i0 be run through a dongle, it needs to be on a hard-wired ethernet port on the back of e.g. a mac mini. I can\'92t find any dongles that support jumbo frames.\
 - Daniel G notes (Aug 2025) that some cameras + some dongles + rear USB-C ports on the mac mini don\'92t work (camera just doesn\'92t show up). All combinations seem to work on the front USB-C ports.\
+- When setting up Newport translation stages, the stage address must be configured in the controller using the manufacturer\'92s supplied Windows software. The addresses in the .plist file need to be decremented by 1, i.e. for Newport addresses 1-2-3 the plist has to read 0-1-2.\
 \
 
 \f1\b Instructions for driver installation
@@ -137,4 +138,4 @@ git config --global --add safe.directory /path/to/spim-interface
 Now return to the instructions in Installation/INSTALL.rtf.\
 \
 \
-Note: Physik Instrumente have provided a Windows program and files to enable the firmware on their new stage controllers to be downgraded to maintain compatibility with the old Mercury command set that I have coded for in Spim GUI. That had postponed the need to introduce a third stage type to support the GCS commands, but that is now implemented (2026) so there shouldn\'92t be any need for that any more.}
+Note: Physik Instrumente had provided a Windows program and files to enable the firmware on their new stage controllers to be downgraded to maintain compatibility with the old Mercury command set that I have coded for in Spim GUI. That had postponed the need to introduce a third stage type to support the GCS commands, but now GCS commands are implemented (2026) there shouldn\'92t be any need for that any more.}
