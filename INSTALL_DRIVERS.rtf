@@ -6,17 +6,19 @@
 }
 {\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
 }
-\paperw11900\paperh16840\margl1440\margr1440\vieww31920\viewh23260\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww31920\viewh19020\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation etc\'94 in the main spim-interface folder)\
+\f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation\'94 in the main spim-interface folder)\
 \
 A related note: if running on old mac hardware, there\'92s the question of what OS version to run on. Anecdotally, Big Sur and Monterey do not perform well with a magnetic hard disk (pre-SSD), so that is worth bearing in mind when making the choice. If you want to use QImaging cameras, also check whether the QImaging 32-bit drivers work on the intended OS version (it\'92s supposed to be beyond Mojave that 32-bit builds are no longer supported)\
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b Hardware notes\
+\f1\b \cf0 Hardware notes\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\b0 - For modern macs with USB-C connections, use a 
+\f0\b0 \cf0 - For modern macs with USB-C connections, use a 
 \f2\i separate
 \f0\i0  USB hub for every USB camera (or a compact USB-C-to-USB-A adaptor). I haven\'92t found any dongles that actually support the USB3.1 gen 2 transfer rate of 10GB/s, which would be required to support a stream from two cameras simultaneously.\
 - The ethernet port used for the Prosilica GS650 must be configured to Jumbo Frames, or it will drop frames.\
@@ -26,8 +28,9 @@ A related note: if running on old mac hardware, there\'92s the question of what 
 - Daniel G notes (Aug 2025) that some cameras + some dongles + rear USB-C ports on the mac mini don\'92t work (camera just doesn\'92t show up). All combinations seem to work on the front USB-C ports.\
 - When setting up Newport translation stages, the stage address must be configured in the controller using the manufacturer\'92s supplied Windows software. The addresses in the .plist file need to be decremented by 1, i.e. for Newport addresses 1-2-3 the plist has to read 0-1-2.\
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b Instructions for driver installation
+\f1\b \cf0 Instructions for driver installation
 \f0\b0 \
 \
 1. You only need to install camera drivers for the camera types you will be using on this system. Installers for Spinnaker/Ximea/Vimba can be obtained from the manufacturers, or for convenience I have archived the installers here:\
@@ -50,9 +53,9 @@ If you want both builds supported on the same machine, one could be installed in
 1c. Optional: Ximea drivers. Temporarily set system preferences "Security & Privacy" to accept applications downloaded from "Anywhere" - or, on newer OS versions, just continue with these instructions until you are told it was blocked, then follow instructions to allow it. Run the 'install' script on the XIMEA disk image (either the standard one, or the ARM one). No need to download the h264 stuff when prompted.\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \
-1d. Optional: Spinnaker drivers for FLIR/Point Grey cameras. For Intel macs, install the Spinnaker .pkg on the machine. Note the instructions in the Spinnaker readme file about installing dependencies. The command in there to install homebrew is outdated - it is now: 
+1d. Optional: Spinnaker drivers for FLIR/Point Grey cameras. For Intel macs, install the Spinnaker .pkg on the machine. Note the instructions in the Spinnaker readme file about installing dependencies. The command in there to install homebrew is outdated - it is now: `
 \fs22 \cf3 \expnd0\expndtw0\kerning0
-/bin/bash \cf0 -c\cf3  \cf0 "$(\cf3 curl \cf0 -fsSL\cf3  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh\cf0 )\'94. For ARM macs, install from {\field{\*\fldinst{HYPERLINK "https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3"}}{\fldrslt https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3}} (file too large to be included in this driver-installs submodule)
+/bin/bash \cf0 -c\cf3  \cf0 "$(\cf3 curl \cf0 -fsSL\cf3  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh\cf0 )"`. For ARM macs, install from {\field{\*\fldinst{HYPERLINK "https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3"}}{\fldrslt https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3}} (file too large to be included in this driver-installs submodule)
 \fs24 \kerning1\expnd0\expndtw0 \
 \
 1e. Optional: Vimba X drivers for Prosilica drivers on ARM macs. Run the installer at VimbaX_Setup-2023-4-macOS.dmg.\
@@ -69,11 +72,11 @@ If you want both builds supported on the same machine, one could be installed in
 \f0\fs24 \CocoaLigature1 \'94 from the command line. Otherwise there is a high chance of problems later (there is a weird compatibility issue that I don\'92t understand, which is fixed by doing this). You may well find that the long-term sync helper crashes on launch if you do not do this!\
 \
 5. Optional: install support for Xbox game controllers for controlling translation stage motion.\
-	Mac OS 10.15 (Sequoia) or newer: support is including as standard in the operating system. To avoid the home button opening annoying windows, go to System Settings->Game Controllers->Controller Shortcuts and switch off \'93Enable controller shortcuts\'94\
-	Mac OS 10.11-14: not supported.\
+	Mac OS 15 (Sequoia) or newer: support is including as standard in the operating system. To avoid the home button opening annoying windows, go to System Settings->Game Controllers->Controller Shortcuts and switch off \'93Enable controller shortcuts\'94\
+	Mac OS 10.11 to Mac OS 14: not supported.\
 	Mac OS 10.10 or earlier: install xbox controller driver 360ControllerInstall, to allow controller to be used for microscope stages. This driver 
 \f1\b absolutely must not be installed
-\f0\b0  on newer versions of mac os as it can cause kernel panics and boot issues!\
+\f0\b0  on newer versions of mac os as it can apparently cause kernel panics and boot issues!\
 \
 \
 If you just want to run an existing copy of the Spim GUI applications, that is all you need to do.\
@@ -81,17 +84,19 @@ e.g. if installing onto a "customer" system you might just do this.\
 If however you want to build the code from source, then several further steps are required:\
 \
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f1\b To build code from source\
+\f1\b \cf0 To build code from source\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\b0 \
+\f0\b0 \cf0 \
 If you are setting things up to build the Spim GUI from scratch, from source code, then you will need to also do the following:\
 \
 6. If building Spim GUI from source code, you need to make camera drivers available to link against in this directory - whether or not you are actually doing a proper install of driver support for each camera type. To do this:\
 6a Unzip the Spinnaker zipfile in this directory (4.x for ARM, 2.x for Intel)\
 6b Copy m3api.framework into this directory from within XIMEA_OSX_SP.dmg or XIMEA_macOS_ARM_SP.dmg (although currently the header files are the same in both)\
 \
-7: Optional: upgrade git from http://git-scm.com/download/mac in order to get gitk support [or indeed you may need to install git entirely, on older systems, which can be done using a standalone installer]. Requires home-brew to be installed, then \'93brew cask install tcl\'94.\
+7: Optional: upgrade git from http://git-scm.com/download/mac in order to get gitk support [or indeed you may need to install git entirely, on older systems, which can be done using a standalone installer]. Requires home-brew to be installed, then `brew cask install tcl`.\
 Then run the command: git config --global merge.tool opendiff\
 Note that one some systems gitk doesn\'92t work. This seems to be a version compatibility issue with the tcl-tk backend, but I haven\'92t managed to sort that out. Alternative is to install https://www.sourcetreeapp.com/download-archives which gives a similar view to gitk. v2.7.6 is compatible with Mac OS 10.12\
 One some versions of Xcode opendiff (FileMerge) just doesn\'92t seem to work with .rtf files - very weird! I know this is a problem with Xcode 14.0.1 and 14.2. SourceTree will give a passable diff display, albeit in an unfamiliar interface.\
@@ -115,7 +120,7 @@ git config --global --add safe.directory /path/to/spim-interface
 \cf0 \strike0\striked0 \
 10. Build libtiff in the driver-installs folder - decompress the file tiff-4.0.9.zip, navigate to the folder that has just been decompressed, and run the relevant one of the following commands (no need to do a \'93make install\'94 step):\
 \
-10a. On Intel macs, run: \'93./configure --disable-shared --disable-lzma --disable-jpeg CFLAGS='-target x86_64-apple-macos10.11' CXXFLAGS='-target x86_64-apple-macos10.11' LDFLAGS='-target x86_64-apple-macos10.11; make -j 2\'94\
+10a. On Intel macs, run: `./configure --disable-shared --disable-lzma --disable-jpeg CFLAGS='-target x86_64-apple-macos10.11' CXXFLAGS='-target x86_64-apple-macos10.11' LDFLAGS='-target x86_64-apple-macos10.11'; make -j 2`\
 [n.b. we specify macos10.11 to match the target OS version in Spim GUI, to silence compiler warnings]\
 \
 10b On ARM macs, build a universal library by running \'93FLAGS_TO_USE='-arch x86_64 -arch arm64 -mmacosx-version-min=10.11'; ./configure CFLAGS=$\{FLAGS_TO_USE\} CXXFLAGS=$\{FLAGS_TO_USE\} LDFLAGS=$\{FLAGS_TO_USE\} --disable-shared; make -j 4\'94\
