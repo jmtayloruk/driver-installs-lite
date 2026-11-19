@@ -6,7 +6,7 @@
 }
 {\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
 }
-\paperw11900\paperh16840\margl1440\margr1440\vieww31920\viewh19020\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww23460\viewh20180\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation\'94 in the main spim-interface folder)\
@@ -53,10 +53,17 @@ If you want both builds supported on the same machine, one could be installed in
 1c. Optional: Ximea drivers. Temporarily set system preferences "Security & Privacy" to accept applications downloaded from "Anywhere" - or, on newer OS versions, just continue with these instructions until you are told it was blocked, then follow instructions to allow it. Run the 'install' script on the XIMEA disk image (either the standard one, or the ARM one). No need to download the h264 stuff when prompted.\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \
-1d. Optional: Spinnaker drivers for FLIR/Point Grey cameras. For Intel macs, install the Spinnaker .pkg on the machine. Note the instructions in the Spinnaker readme file about installing dependencies. The command in there to install homebrew is outdated - it is now: `
+1d. Optional: Spinnaker drivers for FLIR/Point Grey cameras. For Intel macs, install the Spinnaker 2.6 pkg on the machine. Note the instructions in the Spinnaker readme file about installing dependencies. The command in there to install homebrew is outdated - it is now: `
 \fs22 \cf3 \expnd0\expndtw0\kerning0
-/bin/bash \cf0 -c\cf3  \cf0 "$(\cf3 curl \cf0 -fsSL\cf3  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh\cf0 )"`. For ARM macs, install from {\field{\*\fldinst{HYPERLINK "https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3"}}{\fldrslt https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3}} (file too large to be included in this driver-installs submodule)
-\fs24 \kerning1\expnd0\expndtw0 \
+/bin/bash \cf0 -c\cf3  \cf0 "$(\cf3 curl \cf0 -fsSL\cf3  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh\cf0 )"`
+\fs24 \kerning1\expnd0\expndtw0 . For ARM macs, install the Spinnaker 4.4 dmg on the machine (to check for more recent driver versions, check {\field{\*\fldinst{HYPERLINK "https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor3"}}{\fldrslt 
+\fs22 \expnd0\expndtw0\kerning0
+https://www.teledynevisionsolutions.com/support/support-center/software-firmware-downloads/iis/spinnaker-sdk-download/spinnaker-sdk--download-files/#anchor1}}
+\fs22 \expnd0\expndtw0\kerning0
+ 
+\fs24 \kerning1\expnd0\expndtw0 )\
+Note that Mac OS may not recognise the vendor signature in the Spinnaker driver folder, and may refuse to open the dmg. If that\'92s the case, you will need to make your own judgement and (if you are happy) override by going to System Settings -> Privacy and Security.\
+Note that if using a different, future version of the Spinnaker SDK you will need to manually edit `include/spinc/SpinnakerGenApiDefsC.h` to change Boolean to _Boolean to avoid a clash with the legacy MacTypes.h file\
 \
 1e. Optional: Vimba X drivers for Prosilica drivers on ARM macs. Run the installer at VimbaX_Setup-2023-4-macOS.dmg.\
 \
