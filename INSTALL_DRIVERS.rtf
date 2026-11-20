@@ -6,7 +6,7 @@
 }
 {\*\expandedcolortbl;;\csgray\c0;\csgenericrgb\c49804\c49804\c49804;\csgray\c50000;
 }
-\paperw11900\paperh16840\margl1440\margr1440\vieww23460\viewh20180\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww23460\viewh19020\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation\'94 in the main spim-interface folder)\
@@ -36,6 +36,7 @@ A related note: if running on old mac hardware, there\'92s the question of what 
 1. You only need to install camera drivers for the camera types you will be using on this system. Installers for Spinnaker/Ximea/Vimba can be obtained from the manufacturers, or for convenience I have archived the installers here:\
 https://drive.google.com/drive/folders/1S1qlP1ljtiXiidJy6oINp2YbAXds2mOe?usp=sharing\
 (these files are too large to be contained in a github-hosted repository)\
+Note that under the Jamf device management software, installation of these drivers will not be permitted on the latest OS versions (in 2026). Ideally the vendors would make their installers properly compliant, but in the meantime in Glasgow we can request use of the "Quarantine Gatekeeper\'94 policy. This can be accessed from the Self Service app (look under the \'93gatekeeper polices\'94 category once permission has been granted).\
 \
 1a. Optional: Qimaging drivers. Run the QCapture installer from this directory here. Note that if we want to actually use a QImaging camera, we require a 32-bit build of Spim GUI: the 64-bit QCapture driver has always crashed on launch in my hands(!).\
 \
@@ -67,7 +68,7 @@ Note that if using a different, future version of the Spinnaker SDK you will nee
 \
 1e. Optional: Vimba X drivers for Prosilica drivers on ARM macs. Run the installer at VimbaX_Setup-2023-4-macOS.dmg.\
 \
-2. FTDI drivers should be installed. This could be done using the .dmg installer file, but better (up to OS X 10.9 at least) would be to copy the .kext direct to /System/Library/Extensions. May need to restart and/or touch the parent folder to get it to be picked up. See separate note \'93FTDI Readme.txt\'94 for more details on the reasons behind these two install methods.\
+2. Optional: FTDI drivers are required on operating systems older than 10.9. This could be done using the .dmg installer file, but better would be to copy the .kext direct to /System/Library/Extensions. May need to restart and/or touch the parent folder to get it to be picked up. See separate note \'93FTDI Readme.txt\'94 for more details on the reasons behind these two install methods.\
 \
 3. Install anaconda python 3.x, if not already present: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html .\
 		 (2.7 is also supported, but you will need to rebuild code from source, after tweaking the Xcode project file)\
