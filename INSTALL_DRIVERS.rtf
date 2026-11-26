@@ -11,7 +11,9 @@
 
 \f0\fs24 \cf0 This folder contains drivers and libraries required for the Spim GUI. These need to be installed as part of the overall installation process (see folder \'93Installation\'94 in the main spim-interface folder)\
 \
-A related note: if running on old mac hardware, there\'92s the question of what OS version to run on. Anecdotally, Big Sur and Monterey do not perform well with a magnetic hard disk (pre-SSD), so that is worth bearing in mind when making the choice. If you want to use QImaging cameras, also check whether the QImaging 32-bit drivers work on the intended OS version (it\'92s supposed to be beyond Mojave that 32-bit builds are no longer supported)\
+A related note: if running on old mac hardware, there\'92s the question of what OS version to run on. Anecdotally, Big Sur and Monterey do not perform well with a magnetic hard disk (pre-SSD), so that is worth bearing in mind when making the choice. \
+\
+The 32 bit build is probably obsolete now. Certainly it has some compile errors. It might be possible to resurrect if we still want to use QImaging cameras for some reason. That also needs a careful check about whether the QImaging 32-bit drivers work on the intended OS version (it\'92s supposed to be beyond Mojave that 32-bit builds are no longer supported).\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
@@ -70,14 +72,13 @@ Note that if using a different, future version of the Spinnaker SDK you will nee
 \
 2. Optional: FTDI drivers are required on operating systems older than 10.9. This could be done using the .dmg installer file, but better would be to copy the .kext direct to /System/Library/Extensions. May need to restart and/or touch the parent folder to get it to be picked up. See separate note \'93FTDI Readme.txt\'94 for more details on the reasons behind these two install methods.\
 \
-3. Install anaconda python 3.x, if not already present: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html .\
-		 (2.7 is also supported, but you will need to rebuild code from source, after tweaking the Xcode project file)\
-		 (miniconda is also supported. You will need to run `pip install numpy scipy matplotlib tifffile` after installing miniconda)\
+3. Install anaconda/miniconda python 3.x, if not already present: https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html .\
+	Minimum supported Python version is 3.10 (the Spim GUI helper app uses various bits of the C Python API that were only introduced in 3.10).\
+	Miniconda is supported; note that you will need to run `pip install numpy scipy matplotlib tifffile` after the initial install of miniconda\
 3a. Optional: if you want Anaconda installed and accessible for all users of the computer, it seems you need to manually copy the contents of the .bash_profile for the user who did the installing, and put it into the .zprofile for each other user. (I am not sure where the discrepancy in profile name comes from. Anaconda seems to only modify .bash_profile, but this seems to work; for other users .bash_profile isn\'92t read and it has to be .zprofile that is edited)\
-\
-4. \ul Whether or not\ulnone  you already had anaconda on your system, you are strongly encouraged to run \'93
+3b. If the long-term sync helper crashes on launch (particularly if you already had anaconda installed on your sustem on your system), you may find the problem is fixed if  yourun \'93
 \f3\fs22 \CocoaLigature0 pip install --upgrade --force-reinstall scipy
-\f0\fs24 \CocoaLigature1 \'94 from the command line. Otherwise there is a high chance of problems later (there is a weird compatibility issue that I don\'92t understand, which is fixed by doing this). You may well find that the long-term sync helper crashes on launch if you do not do this!\
+\f0\fs24 \CocoaLigature1 \'94 from the command line (there is a weird compatibility issue that I don\'92t understand, which is fixed by doing this).\
 \
 5. Optional: install support for Xbox game controllers for controlling translation stage motion.\
 	Mac OS 15 (Sequoia) or newer: support is including as standard in the operating system. To avoid the home button opening annoying windows, go to System Settings->Game Controllers->Controller Shortcuts and switch off \'93Enable controller shortcuts\'94\
